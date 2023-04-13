@@ -33,11 +33,13 @@ function App() {
       <header className="App-header">
        
           <h3> Enter Start and End Dates </h3>
+          <TextInput></TextInput>
           <p>Start</p> {start_date}
           <span></span>
           <p>End</p>
+          <TextInput></TextInput>
           {end_date} 
-        
+          <Button></Button>
       </header>
     </div>
   );
