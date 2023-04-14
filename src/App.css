@@ -12,6 +12,12 @@
   text-align: right;
 }
 
+.date {
+  display: flex;
+  direction: column;
+  height: 25;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;

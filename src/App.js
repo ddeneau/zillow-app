@@ -1,7 +1,8 @@
 import './App.css';
 import { Button, TextInput, View } from 'react-native-web';
-import {useState} from 'react'
+import {useState } from 'react'
 import styles from './UI/customComponents'
+import DateTimePicker from './UI/dateComponent';
 
 
 
@@ -10,6 +11,9 @@ function App() {
   const [start_date, set_start_date] = useState('')
   const [end_date, set_end_date] = useState('')
   const [results, set_results] = useState('')
+  const city = 'savannah'
+  const state_code = 'ga'
+  const [zip, set_zip] = useState('')
 
   // Use variables, Zillow API and keys to search for desired information.
   const handleSearch = () => {
@@ -21,7 +25,7 @@ function App() {
       }
     };
 
-    fetch(`https://zillow56.p.rapidapi.com/search?location=houston%2C%20tx&`, options)
+    fetch(`https://zillow56.p.rapidapi.com/search?location=${city}%2C%20${state_code}&`, options)
       .then(response => response.json())
       .then(response => set_results(response.results))
       .catch(err => console.error(err));
@@ -37,20 +41,35 @@ function App() {
     set_end_date(event.target.value);
   }
 
+  const handleZipChange = (event) => {
+    set_zip(event.target.value)
+  }
+
   return (
       <div className="controls">
         <header className="App-header">
-            <h3> Enter Start and End Dates </h3>
-            <p>Start Date</p>
-            <TextInput type="date" style={styles.text_input} value={start_date} onChange={handleStartDateChange}></TextInput>
+            <h2>Welcome to your Zillow Web App</h2>
+            <h4> Enter Start and End Dates </h4>
+            <div className="date">
+              <p>Start Date: </p>
+              <DateTimePicker style={styles.text_input} onChange={handleStartDateChange}></DateTimePicker>
+              <span></span>
+            </div>
+              <span></span>
+            <div className="date">
+              <p>End Date: </p>
+              <span></span>
+              <DateTimePicker style={styles.text_input} onChange={handleEndDateChange}></DateTimePicker>
+            </div>
             <span></span>
-            <p>End Date</p>
-            <TextInput type="date" style={styles.text_input} value={end_date} onChange={handleEndDateChange}></TextInput>
+            <p> Zip Code: </p>
+            <TextInput type="text" style={styles.text_input} value={zip} onChange={handleZipChange}></TextInput>
+            <span></span>
             <View style={styles.activate_button}>
               <Button title='Send Request' onPress={handleSearch} ></Button>
             </View>
             <div className="results">
-              <h3> Resuts: </h3>
+              <h3> Resuts ({start_date} {end_date}): </h3>
               <p id='results'></p>
             </div>
         </header>
