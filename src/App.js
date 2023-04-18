@@ -3,6 +3,7 @@ import { Button, TextInput, View } from 'react-native-web';
 import {useState } from 'react'
 import styles from './UI/customComponents'
 import DateTimePicker from './UI/dateComponent';
+import { differenceInDays } from 'date-fns'
 
 
 
@@ -11,6 +12,7 @@ function App() {
   const [start_date, set_start_date] = useState('')
   const [end_date, set_end_date] = useState('')
   const [results, set_results] = useState('')
+  const [dateRange, set_date_range] = useState('')
   const city = 'savannah'
   const state_code = 'ga'
   const [zip, set_zip] = useState('')
@@ -31,6 +33,14 @@ function App() {
       .catch(err => console.error(err));
 
       document.getElementById("results").innerText = results
+  }
+
+  const handleDateCalculation = (event) => {
+    set_date_range(differenceInDays(new Date(end_date), new Date(start_date)))
+    if(dateRange < 0) {
+      set_date_range(0)
+      alert("Check that the Start Date is before the End Date")
+    }
   }
 
   const handleStartDateChange = (event) => {
@@ -66,10 +76,10 @@ function App() {
             <TextInput type="text" style={styles.text_input} value={zip} onChange={handleZipChange}></TextInput>
             <span></span>
             <View style={styles.activate_button}>
-              <Button title='Send Request' onPress={handleSearch} ></Button>
+              <Button title='Send Request' onPress={handleDateCalculation} ></Button>
             </View>
             <div className="results">
-              <h3> Resuts ({start_date} {end_date}): </h3>
+              <h3> Results {start_date} to {end_date},  {dateRange} days  </h3>
               <p id='results'></p>
             </div>
         </header>
