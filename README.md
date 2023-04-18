@@ -1,3 +1,9 @@
+# Welcome to Zillow App. The name can use some work, but this is a lightweight web application designed to run on your local machine, and access a Zillow API. You can enter a date range, and get information on homes that were sold within that date range. 
+
+<img width="1134" alt="Screen Shot 2023-04-18 at 5 40 38 PM" src="https://user-images.githubusercontent.com/58960615/232911358-1550dce8-2bb7-4818-a9d8-75763739e8a6.png">
+
+You'll need to clone this repository (or download it to your computer), open the project in a terminal/CLI window, and follow the insturctions below.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
