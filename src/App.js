@@ -7,36 +7,49 @@ import { differenceInDays } from 'date-fns'
 
 
 
+
 function App() {
   // Set up the variables needed to change dates and results.
   const [start_date, set_start_date] = useState('')
   const [end_date, set_end_date] = useState('')
   const [results, set_results] = useState('')
   const [dateRange, set_date_range] = useState('')
-  const city = 'savannah'
-  const state_code = 'ga'
   const [zip, set_zip] = useState('')
+
 
   // Use variables, Zillow API and keys to search for desired information.
   const handleSearch = () => {
     const options = {
       method: 'GET',
       headers: {
-        'X-RapidAPI-Key': '8b5742ff19msh24018e26d4b87c3p1979fdjsn8ce11750e43f',
-        'X-RapidAPI-Host': 'zillow56.p.rapidapi.com'
+        'X-RapidAPI-Key': '33c9780feamsh3d280eef95d1b52p1099efjsn95f1dc4b301d',
+        'X-RapidAPI-Host': 'zillow-data-v2.p.rapidapi.com'
       }
     };
-
-    fetch(`https://zillow56.p.rapidapi.com/search?location=${city}%2C%20${state_code}&`, options)
+    
+    fetch(`https://zillow-data-v2.p.rapidapi.com/search?location=${zip}&status=RecentlySold`, options)
       .then(response => response.json())
-      .then(response => set_results(response.results))
+      .then(response => console.log(response))
       .catch(err => console.error(err));
 
       document.getElementById("results").innerText = results
   }
 
+  const practiceSearch = () => {
+    set_results(require('./sample.json'))
+
+    var page = results['data']
+
+    for (var i = 0; i < results['totalPages']; i++)
+      var zillowListing = page[`${i}`]
+      var address = (zillowListing['address'])
+
+      document.getElementById("results").innerHTML +=
+       `<p> ${zillowListing} </p>`
+  }
+
   const handleDateCalculation = (event) => {
-    set_date_range(differenceInDays(new Date(end_date), new Date(start_date)))
+    set_date_range(differenceInDays(new Date(start_date), new Date(end_date)))
     if(dateRange < 0) {
       set_date_range(0)
       alert("Check that the Start Date is before the End Date")
@@ -49,6 +62,7 @@ function App() {
 
   const handleEndDateChange = (event) => {
     set_end_date(event.target.value);
+    handleDateCalculation()
   }
 
   const handleZipChange = (event) => {
@@ -72,15 +86,15 @@ function App() {
               <DateTimePicker style={styles.text_input} onChange={handleEndDateChange}></DateTimePicker>
             </div>
             <span></span>
-            <p> Zip Code: </p>
+            <h4> Zip Code: </h4>
             <TextInput type="text" style={styles.text_input} value={zip} onChange={handleZipChange}></TextInput>
             <span></span>
             <View style={styles.activate_button}>
-              <Button title='Send Request' onPress={handleDateCalculation} ></Button>
+              <Button title='Send Request' onPress={practiceSearch} ></Button>
             </View>
             <div className="results">
               <h3> Results {start_date} to {end_date},  {dateRange} days  </h3>
-              <p id='results'></p>
+              <div className='resultsText' id='results'></div>
             </div>
         </header>
       </div>

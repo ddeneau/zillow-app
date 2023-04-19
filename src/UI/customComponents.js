@@ -1,14 +1,12 @@
 import {StyleSheet} from 'react-native-web'
 
 const styles = StyleSheet.create(
-    {date_input: {
-        height: 5
-    }},
     {text_input: {
         height: 25, 
-        width: 25, 
+        width: '25%', 
         backgroundColor: 'grey',
-        borderRadius: 15 }},
+        borderRadius: 25
+        }},
     {activate_button: {
         alignItems: 'center',
         justifyContent: 'center',

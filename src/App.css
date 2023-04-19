@@ -9,7 +9,12 @@
 }
 
 .results {
-  text-align: right;
+  text-decoration: underline;
+  text-align: center
+}
+
+.resultsText {
+  text-align: center;
 }
 
 .date {
