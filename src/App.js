@@ -39,13 +39,19 @@ function App() {
     set_results(require('./sample.json'))
 
     var page = results['data']
+    var listingIsInDateRange = true
+    var address = ''
+    console.log(results['totalPages'])
 
-    for (var i = 0; i < results['totalPages']; i++)
+    for (var i = 0; i < results['totalPages']; i++) {
       var zillowListing = page[`${i}`]
-      var address = (zillowListing['address'])
+      address = zillowListing['address']
 
-      document.getElementById("results").innerHTML +=
-       `<p> ${zillowListing} </p>`
+      if(listingIsInDateRange) {
+        document.getElementById("results").innerHTML +=
+        `<p> ${address} </p>`
+      }
+    }
   }
 
   const handleDateCalculation = (event) => {
