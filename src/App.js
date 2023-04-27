@@ -33,7 +33,7 @@ function App() {
         const options = {
           method: 'GET',
           headers: {
-            'X-RapidAPI-Key': '33c9780feamsh3d280eef95d1b52p1099efjsn95f1dc4b301d',
+            'X-RapidAPI-Key': 'key',
             'X-RapidAPI-Host': 'zillow-data-v2.p.rapidapi.com'
           }
         };
