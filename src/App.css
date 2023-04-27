@@ -4,6 +4,24 @@
   justify-content: left;
 }
 
+.buttons {
+  display: flex;
+  justify-content: center;
+}
+
+.buttons p {
+  display: flex;
+  flex-direction: column;
+  padding: 5%;
+  align-self: center;
+  align-items: center;
+}
+
+.buttons p switch {
+  display: flex;
+  align-self: center;
+}
+
 .controls {
   text-align: center;
 }

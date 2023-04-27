@@ -10,9 +10,7 @@ const styles = StyleSheet.create(
     {activate_button: {
         alignItems: 'center',
         justifyContent: 'center',
-        paddingVertical: 12,
-        paddingHorizontal: 32,
-        borderRadius: 4,
+        borderRadius: 26,
         elevation: 3,
         backgroundColor: 'black',
     }})
